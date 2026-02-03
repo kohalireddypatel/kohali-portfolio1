@@ -1,0 +1,616 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Sree Kohali — Software Development Engineer resume website" />
+  <title>Sree Kohali | SDE</title>
+
+  <style>
+    :root{
+      --bg0:#070A12;
+      --bg1:#0A1020;
+      --card: rgba(255,255,255,.06);
+      --card2: rgba(255,255,255,.09);
+      --line: rgba(255,255,255,.10);
+      --text:#EAF0FF;
+      --muted: rgba(234,240,255,.70);
+      --muted2: rgba(234,240,255,.55);
+
+      --a1:#7C3AED; /* purple */
+      --a2:#06B6D4; /* cyan */
+      --a3:#22C55E; /* green */
+      --a4:#F59E0B; /* amber */
+
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --radius: 18px;
+      --radius2: 26px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 10% -10%, rgba(124,58,237,.30), transparent 60%),
+        radial-gradient(900px 600px at 110% 10%, rgba(6,182,212,.22), transparent 58%),
+        radial-gradient(900px 600px at 60% 120%, rgba(34,197,94,.12), transparent 55%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      line-height:1.55;
+      overflow-x:hidden;
+    }
+
+    a{color:inherit; text-decoration:none}
+    a:hover{opacity:.95}
+
+    /* Animated glow blobs */
+    .blob{
+      position:fixed;
+      inset:auto;
+      width:520px;
+      height:520px;
+      filter: blur(55px);
+      opacity:.35;
+      z-index:-2;
+      border-radius:50%;
+      animation: float 12s ease-in-out infinite;
+      pointer-events:none;
+    }
+    .b1{ left:-140px; top:-120px; background: radial-gradient(circle at 30% 30%, rgba(124,58,237,.9), transparent 55%); }
+    .b2{ right:-170px; top:40px; background: radial-gradient(circle at 35% 30%, rgba(6,182,212,.9), transparent 55%); animation-delay:-4s;}
+    .b3{ left:30%; bottom:-260px; background: radial-gradient(circle at 40% 30%, rgba(34,197,94,.75), transparent 60%); animation-delay:-7s;}
+    @keyframes float{
+      0%,100%{ transform: translate3d(0,0,0) scale(1); }
+      50%{ transform: translate3d(0,-22px,0) scale(1.03); }
+    }
+
+    .wrap{max-width:1100px; margin:0 auto; padding:28px 18px 90px}
+
+    /* Top bar */
+    .topbar{
+      position:sticky;
+      top:10px;
+      z-index:20;
+      margin:0 auto 18px;
+      padding:10px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background: rgba(10,16,32,.55);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 40px rgba(0,0,0,.25);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      padding:6px 10px;
+      border-radius:999px;
+      background: rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      background: linear-gradient(135deg, var(--a1), var(--a2));
+      box-shadow: 0 0 0 4px rgba(124,58,237,.18);
+    }
+    .brand strong{font-size:14px; letter-spacing:.4px}
+    .nav{
+      display:flex; gap:6px; flex-wrap:wrap; justify-content:center;
+    }
+    .nav a{
+      font-size:13px;
+      color:var(--muted);
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid transparent;
+    }
+    .nav a:hover{
+      color:var(--text);
+      background: rgba(255,255,255,.05);
+      border-color: rgba(255,255,255,.08);
+    }
+    .actions{display:flex; gap:8px; align-items:center}
+    .btn{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:9px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      color:var(--text);
+      font-weight:700;
+      font-size:13px;
+    }
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(124,58,237,.55), rgba(6,182,212,.45));
+      border-color: rgba(255,255,255,.14);
+    }
+    .btn:hover{transform: translateY(-1px)}
+    .btn:active{transform: translateY(0px)}
+    .icon{width:16px;height:16px; display:inline-block}
+
+    /* Hero */
+    .hero{
+      position:relative;
+      border:1px solid var(--line);
+      border-radius: var(--radius2);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background: conic-gradient(from 180deg, rgba(124,58,237,.35), rgba(6,182,212,.35), rgba(34,197,94,.25), rgba(245,158,11,.20), rgba(124,58,237,.35));
+      filter: blur(18px);
+      opacity:.55;
+      z-index:0;
+      animation: spin 18s linear infinite;
+    }
+    @keyframes spin{to{transform: rotate(360deg)}}
+    .hero-inner{
+      position:relative;
+      z-index:1;
+      padding:26px;
+      background: rgba(10,16,32,.62);
+      backdrop-filter: blur(10px);
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    .headline{
+      margin:0;
+      font-size:38px;
+      letter-spacing:-.8px;
+      line-height:1.1;
+    }
+    .tagline{
+      margin:12px 0 0;
+      color:var(--muted);
+      max-width:70ch;
+      font-size:15px;
+    }
+    .badges{
+      margin-top:14px;
+      display:flex; flex-wrap:wrap; gap:8px;
+    }
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      color:var(--muted);
+      font-size:13px;
+    }
+    .kpi{
+      color:var(--text);
+      font-weight:800;
+    }
+
+    .card{
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      border-radius: var(--radius);
+      padding:16px;
+    }
+    .contact{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      height:100%;
+      justify-content:space-between;
+    }
+    .contact a, .contact div{
+      display:flex; align-items:center; gap:10px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      color:var(--muted);
+      font-size:14px;
+    }
+    .contact a:hover{color:var(--text)}
+    .mini{
+      color:var(--muted2);
+      font-size:12px;
+      margin-top:6px;
+    }
+
+    /* Sections */
+    section{margin-top:18px}
+    .section-title{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      margin:0 0 10px;
+    }
+    .section-title h2{
+      margin:0;
+      font-size:14px;
+      letter-spacing:.5px;
+      text-transform:uppercase;
+      color: rgba(234,240,255,.85);
+    }
+    .section-title .hint{color:var(--muted2); font-size:13px}
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+    }
+    @media (max-width: 960px){
+      .hero-grid{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+      .headline{font-size:32px}
+      .actions{display:none}
+    }
+
+    /* Skills chips */
+    .chips{display:flex; flex-wrap:wrap; gap:8px}
+    .chip{
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    /* Timeline cards */
+    .item{
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      border-radius: var(--radius);
+      padding:16px;
+      transition: transform .18s ease, background .18s ease;
+    }
+    .item:hover{ transform: translateY(-2px); background: rgba(255,255,255,.055); }
+    .item-head{
+      display:flex; justify-content:space-between; gap:12px; align-items:flex-start;
+    }
+    .item h3{margin:0; font-size:16px}
+    .where{margin-top:6px; color:var(--muted); font-size:14px}
+    .time{color:var(--muted2); font-size:13px; white-space:nowrap}
+    ul{margin:12px 0 0 18px}
+    li{margin:8px 0}
+
+    /* Project cards */
+    .project-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+    }
+    @media (max-width: 960px){ .project-grid{grid-template-columns:1fr} }
+
+    .proj{
+      position:relative;
+      overflow:hidden;
+    }
+    .proj::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: linear-gradient(135deg, rgba(124,58,237,.25), rgba(6,182,212,.18), rgba(34,197,94,.16));
+      opacity:.0;
+      transition: opacity .22s ease;
+      z-index:0;
+    }
+    .proj:hover::before{opacity:1}
+    .proj > *{position:relative; z-index:1}
+
+    .proj-top{
+      display:flex; justify-content:space-between; align-items:flex-start; gap:12px;
+      margin-bottom:10px;
+    }
+    .proj-title{margin:0; font-size:16px}
+    .stack{color:var(--muted); font-size:13px; margin-top:6px}
+    .proj-actions{display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end}
+    .linkbtn{
+      display:inline-flex; gap:8px; align-items:center;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color:var(--text);
+      font-size:13px;
+      font-weight:750;
+    }
+    .linkbtn.secondary{
+      color:var(--muted);
+      background: rgba(255,255,255,.04);
+    }
+
+    footer{
+      margin-top:22px;
+      text-align:center;
+      color:var(--muted2);
+      font-size:13px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="blob b3"></div>
+
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <span class="dot"></span>
+        <strong>Sree Kohali</strong>
+      </div>
+
+      <div class="nav">
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#education">Education</a>
+      </div>
+
+      <div class="actions">
+        <!-- Replace with your links -->
+        <a class="btn" href="mailto:sreekohalip@gmail.com">
+          <span class="icon">✉️</span> Email
+        </a>
+        <a class="btn" href="https://github.com/kohalireddypatel" target="_blank" rel="noreferrer">
+          <span class="icon">💻</span> GitHub
+        </a>
+        <a class="btn primary" href="./resume.pdf" download>
+          <span class="icon">⬇️</span> Resume
+        </a>
+      </div>
+    </div>
+
+    <div class="hero">
+      <div class="hero-inner">
+        <div class="hero-grid">
+          <div>
+            <h1 class="headline">Software Development Engineer building reliable cloud systems.</h1>
+            <p class="tagline">
+              I build backend services and distributed systems with strong ownership: design → ship → monitor → operate.
+              Comfortable with ambiguity, ruthless about reliability, and focused on measurable impact.
+            </p>
+
+            <div class="badges">
+              <span class="badge">⚡ <span class="kpi">30%+</span> latency reduction (API optimization)</span>
+              <span class="badge">🛠️ <span class="kpi">10+ hrs/week</span> manual work eliminated</span>
+              <span class="badge">📈 <span class="kpi">99%</span> uptime maintained</span>
+              <span class="badge">☁️ AWS • Microservices • Observability</span>
+            </div>
+
+            <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap">
+              <a class="btn primary" href="#projects">View Projects</a>
+              <a class="btn" href="#experience">See Experience</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="contact">
+              <a href="tel:+14013004448">📞 +1 (401) 300-4448</a>
+              <a href="mailto:sreekohalip@gmail.com">✉️ sreekohalip@gmail.com</a>
+
+              <!-- Replace these with your real URLs -->
+              <a href="https://github.com/kohalireddypatel" target="_blank" rel="noreferrer">💻 GitHub</a>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section id="skills">
+      <div class="section-title">
+        <h2>Skills</h2>
+        <div class="hint">Focused, not a keyword dump</div>
+      </div>
+
+      <div class="grid">
+        <div class="item">
+          <div class="item-head">
+            <div>
+              <h3>Programming and Development</h3>
+              <div class="where">Languages • Backend • Frontend</div>
+            </div>
+          </div>
+          <div class="chips" style="margin-top:12px">
+            <span class="chip">Java</span><span class="chip">Python</span><span class="chip">Go</span>
+            <span class="chip">TypeScript</span><span class="chip">JavaScript</span>
+            <span class="chip">REST</span><span class="chip">Spring Boot</span><span class="chip">FastAPI</span>
+            <span class="chip">Distributed Systems</span><span class="chip">Microservices</span><span class="chip">Node.js</span>
+            <span class="chip">React</span><span class="chip">Angular</span>
+            
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="item-head">
+            <div>
+              <h3>Cloud, DevOps & Data</h3>
+              <div class="where">Cloud & Containers • Databases & Data • DevOps</div>
+            </div>
+          </div>
+          <div class="chips" style="margin-top:12px">
+            <span class="chip">AWS (Lambda, EC2, S3, DynamoDB, CloudWatch)</span>
+            <span class="chip">Docker</span><span class="chip">Kubernetes</span>
+            <span class="chip">MySQL</span><span class="chip">Snowflake</span>
+            <span class="chip">PostgreSQL</span><span class="chip">MongoDB</span><span class="chip">Redis</span>
+            <span class="chip">GitHub Actions</span><span class="chip">CI/CD</span><span class="chip">Monitoring & Logging</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="section-title">
+        <h2>Experience</h2>
+        <div class="hint">Impact + ownership, not chores</div>
+      </div>
+
+      <div class="grid">
+        <div class="item">
+          <div class="item-head">
+            <div>
+              <h3>Software Development Engineer</h3>
+              <div class="where">Shark Analytics</div>
+            </div>
+            <div class="time">Jun 2025 – Present</div>
+          </div>
+          <ul>
+            <li>Owned backend automation + orchestration services supporting <b>100+ lab systems</b> and internal users.</li>
+            <li>Built event-driven workflows with retries/timeouts, improving resilience and reducing failures.</li>
+            <li>Optimized APIs and hot paths, cutting average latency by <b>30%+</b>.</li>
+            <li>Handled on-call + production RCAs; shipped permanent fixes (not band-aids).</li>
+          </ul>
+        </div>
+
+        <div class="item">
+          <div class="item-head">
+            <div>
+              <h3>Software Developer — Automation & Backend Systems</h3>
+              <div class="where">University of North Texas</div>
+            </div>
+            <div class="time">Apr 2024 – May 2025</div>
+          </div>
+          <ul>
+            <li>Automated payroll + scheduling with Python; reduced errors by <b>8%</b> and saved <b>$12K/year</b>.</li>
+            <li>Built fault-tolerant ETL pipelines with scheduling, logging, and monitoring.</li>
+            <li>Eliminated <b>10+ hrs/week</b> of manual work via automation services integrating DBs + APIs.</li>
+            <li>Built dashboards + alerting; improved utilization by <b>28%</b> and maintained <b>99% uptime</b>.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="section-title">
+        <h2>Projects</h2>
+        <div class="hint">Each has GitHub links (opens in new tab)</div>
+      </div>
+
+      <div class="project-grid">
+        <div class="item proj">
+          <div class="proj-top">
+            <div>
+              <h3 class="proj-title">Expense Tracker with Visual Insights</h3>
+              <div class="stack">React • Node.js • MongoDB • AWS</div>
+            </div>
+            <div class="proj-actions">
+              <!-- Replace with your real GitHub repo link -->
+              <a class="linkbtn" href="https://github.com/kohalireddypatel/Expense-Tracker-with-Visual-Insights" target="_blank" rel="noreferrer">💻 GitHub</a>
+              <!-- Optional live demo -->
+              <a class="linkbtn secondary" href="#" target="_blank" rel="noreferrer"></a>
+            </div>
+          </div>
+          <ul>
+            <li>Designed backend handling <b>10K+ monthly</b> read/write ops with optimized queries and stateless APIs.</li>
+            <li>Implemented JWT auth + caching; reduced login latency from <b>280ms → 90ms</b>.</li>
+            <li>Added logs/metrics/alerts to reduce debugging time during failures.</li>
+          </ul>
+        </div>
+
+        <div class="item proj">
+          <div class="proj-top">
+            <div>
+              <h3 class="proj-title">Accessible Weather Alert System</h3>
+              <div class="stack">Node.js • React • AWS • WebSockets</div>
+            </div>
+            <div class="proj-actions">
+              <a class="linkbtn" href="https://github.com/USERNAME/weather-alerts" target="_blank" rel="noreferrer">💻 GitHub</a>
+              <a class="linkbtn secondary" href="#" target="_blank" rel="noreferrer"></a>
+            </div>
+          </div>
+          <ul>
+            <li>Cloud-native microservices delivering real-time geo-targeted alerts.</li>
+            <li>WebSocket push notifications with <b>&lt;150ms</b> latency for critical alerts.</li>
+            <li>Monitoring + alerting for fast incident detection and resolution.</li>
+          </ul>
+        </div>
+
+        <div class="item proj">
+          <div class="proj-top">
+            <div>
+              <h3 class="proj-title">Social Media Sentiment Analyzer</h3>
+              <div class="stack">FastAPI • NLP (BERT/VADER) • Docker</div>
+            </div>
+            <div class="proj-actions">
+              <a class="linkbtn" href="https://github.com/kohalireddypatel/Social-Media-Sentiment-Analyser" target="_blank" rel="noreferrer">💻 GitHub</a>
+              <a class="linkbtn secondary" href="#" target="_blank" rel="noreferrer"></a>
+            </div>
+          </div>
+          <ul>
+            <li>Real-time sentiment analysis service using BERT + VADER.</li>
+            <li>Containerized deployment supporting thousands of daily API requests with stable latency.</li>
+            <li>Time-series sentiment insights with filtering for actionable breakdowns.</li>
+          </ul>
+        </div>
+
+        <div class="item proj">
+          <div class="proj-top">
+            <div>
+              <h3 class="proj-title">Unit Test Automation Agent (Kiro-style)</h3>
+              <div class="stack">Python • JUnit 5 • Prompting • CI</div>
+            </div>
+            <div class="proj-actions">
+              <a class="linkbtn" href="https://github.com/USERNAME/unit-test-agent" target="_blank" rel="noreferrer">💻 GitHub</a>
+              <a class="linkbtn secondary" href="#" target="_blank" rel="noreferrer"></a>
+            </div>
+          </div>
+          <ul>
+            <li>Generates JUnit 5 tests from source + style examples; iterates based on compilation failures.</li>
+            <li>Designed to reduce test-writing time while enforcing project conventions.</li>
+            <li>Integrates with CI to catch regressions and enforce coverage gates.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="education">
+      <div class="section-title">
+        <h2>Education</h2>
+        <div class="hint">Relevant and short</div>
+      </div>
+
+      <div class="item">
+        <div class="item-head">
+          <div>
+            <h3>University of North Texas — M.S. in Computer Science</h3>
+            <div class="where">GPA: 3.7 / 4.0 • Coursework: DSA, Algorithms, ML, SE, AI</div>
+          </div>
+          <div class="time">Aug 2023 – May 2025</div>
+        </div>
+      </div>
+    </section>
+
+ 
+  </div>
+
+  <script>
+    // Tiny polish: highlight active nav as you scroll
+    const links = Array.from(document.querySelectorAll('.nav a'));
+    const sections = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        const id = '#' + e.target.id;
+        const link = links.find(l => l.getAttribute('href') === id);
+        if (!link) return;
+        if (e.isIntersecting) {
+          links.forEach(x => x.style.background = 'transparent');
+          links.forEach(x => x.style.borderColor = 'transparent');
+          link.style.background = 'rgba(255,255,255,.05)';
+          link.style.borderColor = 'rgba(255,255,255,.10)';
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0.02 });
+
+    sections.forEach(s => obs.observe(s));
+  </script>
+</body>
+</html>
